@@ -48,4 +48,25 @@ const authUser = asyncHandler(async (req, res) => {
   }
 });
 
-export { registerUser, authUser };
+const logoutUser = asyncHandler(async (req, res) => {
+  res.cookie("jwt", "", {
+    httpOnly: true,
+    expires: new Date(0),
+  });
+  res.status(200).json({ message: "Logged out successfully" });
+});
+
+const getCurrentUser = asyncHandler(async (req, res) => {
+  if (req.user) {
+    res.json({
+      _id: req.user._id,
+      username: req.user.username,
+      isAdmin: req.user.isAdmin,
+    });
+  } else {
+    res.status(401);
+    throw new Error("Not authorized");
+  }
+});
+
+export { registerUser, authUser, logoutUser, getCurrentUser };

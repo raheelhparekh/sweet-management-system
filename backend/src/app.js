@@ -12,10 +12,9 @@ connectDB();
 
 const app = express();
 
-// Define allowed origins based on environment
 const corsOptions = {
   origin:
-    process.env.NODE_ENV === "production" ? process.env.FRONTEND_URL : "*",
+    process.env.NODE_ENV === "production" ? process.env.FRONTEND_URL : "http://localhost:5173",
   credentials: true, // Allow cookies to be sent
 };
 
@@ -24,11 +23,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// Define API routes
 app.use("/api/auth", authRoutes);
 app.use("/api/sweets", sweetRoutes);
 
-// Root route for API status check
+// health check
 app.get("/", (req, res) => {
   res.send("Sweet Shop API is running...");
 });

@@ -13,13 +13,13 @@ import admin from "../middleware/admin.middleware.js";
 
 const router = express.Router();
 
-router.post("/", protect, addSweet);
+router.post("/", protect, admin, addSweet);
 
 router.get("/", getSweets);
 
 router.get("/search", searchSweets);
 
-router.put("/:id", protect, updateSweet);
+router.put("/:id", protect, admin, updateSweet);
 
 router.delete("/:id", protect, admin, deleteSweet);
 
