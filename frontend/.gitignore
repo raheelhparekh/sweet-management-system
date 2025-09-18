@@ -23,5 +23,11 @@ dist-ssr
 *.sln
 *.sw?
 
-.env
+.env*
 .prettierignore
+
+# Test coverage reports
+coverage/
+*.lcov
+coverage-final.json
+clover.xml

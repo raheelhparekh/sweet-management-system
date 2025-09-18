@@ -1,3 +1,9 @@
 node_modules
-.env
+.env*
 .prettierignore
+
+# Test coverage reports
+coverage/
+*.lcov
+coverage-final.json
+clover.xml

@@ -4,6 +4,12 @@ import Sweet from "../models/Sweet.models.js";
 const addSweet = asyncHandler(async (req, res) => {
   const { name, category, price, quantity } = req.body;
 
+  // Validate required fields
+  if (!name || !category || !price || quantity === undefined) {
+    res.status(400);
+    throw new Error("Please provide all required fields: name, category, price, quantity");
+  }
+
   const sweetExists = await Sweet.findOne({ name });
 
   if (sweetExists) {
@@ -103,6 +109,13 @@ const purchaseSweet = asyncHandler(async (req, res) => {
 
 const restockSweet = asyncHandler(async (req, res) => {
   const { quantity } = req.body;
+  
+  // Validate quantity
+  if (!quantity || quantity <= 0) {
+    res.status(400);
+    throw new Error("Quantity must be a positive number");
+  }
+
   const sweet = await Sweet.findById(req.params.id);
 
   if (sweet) {
